@@ -18,7 +18,12 @@ namespace Decision_Tree_ALg
             treeCreator.StartBuilding();
             Console.WriteLine(treeCreator);
             ITreeExporter exporter = new JSONTreeExporter();
-            exporter.exportTree("../../Results/Tree.txt", treeCreator.RootNode);
+            DateTime dateTime = DateTime.Now;
+
+            // Add this option in configuration 
+
+            String resultsPathFile = "../../Results/Tree-" + dateTime.ToString().Replace("/", "-") + ".txt";
+            exporter.exportTree(resultsPathFile, treeCreator.RootNode);
         }
     }
 }

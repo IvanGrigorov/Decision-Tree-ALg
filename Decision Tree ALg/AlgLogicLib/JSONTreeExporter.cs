@@ -2,18 +2,19 @@
 using System;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Decision_Tree_ALg.AlgLogicLib
 {
-    class JSONTreeExporter : ITreeExporter
+    class JSONTreeExporter : ATreeExporter, ITreeExporter
     {
-        public void exportTree(string pathFileToSaveTheExport, TreeNode node)
+ 
+        override public void exportTree(string pathFileToSaveTheExport, TreeNode node)
         {
-            //throw new NotImplementedException();
-            using (StreamWriter writer =  File.AppendText(pathFileToSaveTheExport))
+            var validatedPath = this.Regex.Replace(pathFileToSaveTheExport, "-");
+            using (StreamWriter writer =  File.AppendText(validatedPath))
             {
                 var json = new JavaScriptSerializer().Serialize(node); 
-                writer.Write("Hello");
                 writer.Write(json);
 
             }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgLogicLib\ITreeExporter.cs" />
+    <Compile Include="AlgLogicLib\ATreeExporter.cs" />
     <Compile Include="AlgLogicLib\JSONTreeExporter.cs" />
     <Compile Include="Config\InitialConfig.cs" />
     <Compile Include="DataEntities\IDataEntity.cs" />
