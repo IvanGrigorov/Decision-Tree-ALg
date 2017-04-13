@@ -1,6 +1,8 @@
 # Decision-Tree-ALg
 Creating a decision tree platform for different types of data. Currently only Boolean(Yes/No) problems are solvable. No pruning is available yet.  
 
+[![Shippable branch](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff/master.svg?style=plastic)](https://github.com/IvanGrigorov/Decision-Tree-ALg.git)
+
 # DECISION TREE ALG PLATFORM 
 
 
