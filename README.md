@@ -2,7 +2,7 @@
 Creating a decision tree platform for different types of data. Currently only Boolean(Yes/No) problems are solvable. No pruning is available yet.  
 
 # DECISION TREE ALG PLATFORM 
-=================================
+
 
 ## Summary
 --------------
