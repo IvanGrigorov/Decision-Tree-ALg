@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Decision_Tree_ALg.ReadingLibrary;
 using Decision_Tree_ALg.AlgLogicLib;
 
-
 namespace Decision_Tree_ALg
 {
     class Program
@@ -18,6 +17,13 @@ namespace Decision_Tree_ALg
             DecisionTreeCreator treeCreator = new DecisionTreeCreator();
             treeCreator.StartBuilding();
             Console.WriteLine(treeCreator);
+            ITreeExporter exporter = new JSONTreeExporter();
+            DateTime dateTime = DateTime.Now;
+
+            // Add this option in configuration 
+
+            String resultsPathFile = "../../Results/Tree-" + dateTime.ToString().Replace("/", "-") + ".txt";
+            exporter.exportTree(resultsPathFile, treeCreator.RootNode);
         }
     }
 }
