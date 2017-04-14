@@ -3,6 +3,9 @@ Creating a decision tree platform for different types of data. Currently only Bo
 
 [![Shippable branch](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff/master.svg?style=plastic)](https://github.com/IvanGrigorov/Decision-Tree-ALg.git)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0wggl5q6degruk4h/branch/master?svg=true)](https://ci.appveyor.com/project/IvanGrigorov/decision-tree-alg/branch/master)
+
+
 # DECISION TREE ALG PLATFORM 
 
 
