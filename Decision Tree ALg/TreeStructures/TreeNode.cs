@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Decision_Tree_ALg.AlgLogicLib;
 using Decision_Tree_ALg.Config;
+using System;
 
 
 namespace Decision_Tree_ALg.TreeStructures
 {
-    class TreeNode
+    public class TreeNode
     {
 
         public double Entropy { get; set; }
@@ -18,7 +19,6 @@ namespace Decision_Tree_ALg.TreeStructures
         public List<TreeNode> Children { get; set; } = new List<TreeNode>();
         public string ParentTransition { get; set; } = null;
         public Dictionary<string, string> LeafInf { get; set; } = new Dictionary<string, string>(); 
-
         public bool IsUsed { get; set; } = false;
 
 
@@ -55,6 +55,10 @@ namespace Decision_Tree_ALg.TreeStructures
             int count = 0;
             foreach (var example in this.UsedExamplesSoFar)
             {
+                if (example[nameOfFactor] == null)
+                {
+                    throw new NullReferenceException("Trying to invoke property which doesn't exist. Check your parameter value to correspond with DataEntity properties.");
+                }
                 if ((string)example[nameOfFactor] == outcome)
                 {
                     count++;

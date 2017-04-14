@@ -4,15 +4,18 @@ using Decision_Tree_ALg.ReadingLibrary;
 using Decision_Tree_ALg.PrepareDataLib;
 using Decision_Tree_ALg.TreeStructures;
 using System.Linq;
-using System; 
+using System;
+using System.Reflection;
 
 namespace Decision_Tree_ALg.Config
 {
     class InitialConfig
     {
+        private static string projectName = Assembly.GetCallingAssembly().GetName().Name;
+
         private int NumberOfFeatures { get; set; } = 4;
         private static InitialConfig configuration;
-        public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromFile("../../TrainingData/DataExamples.txt");
+        public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromFile(@"C:\Users\Ivan Grigorov\Documents\Visual Studio 2015\Projects\Decision Tree ALg\Decision Tree ALg\TrainingData\DataExamples.txt"); // "../../../" + projectName + "/TrainingData/DataExamples.txt");
 
 
 
