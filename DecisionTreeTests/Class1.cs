@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecisionTreeTests
 {
-    public class Class1
+    public class Class
     {
     }
 }
