@@ -48,13 +48,14 @@
     <Compile Include="AlgLogicLib\ATreeExporter.cs" />
     <Compile Include="AlgLogicLib\JSONTreeExporter.cs" />
     <Compile Include="Config\InitialConfig.cs" />
+    <Compile Include="DataEntities\ADataEntity.cs" />
     <Compile Include="DataEntities\IDataEntity.cs" />
     <Compile Include="DataEntities\DataEntity.cs" />
     <Compile Include="Classifications\Wind.cs" />
     <Compile Include="Classifications\Rain.cs" />
     <Compile Include="Classifications\Humidity.cs" />
     <Compile Include="Classifications\Temperature.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PrepareDataLib\DataPreparator.cs" />
     <Compile Include="AlgLogicLib\DecisionTreeCreator.cs" />

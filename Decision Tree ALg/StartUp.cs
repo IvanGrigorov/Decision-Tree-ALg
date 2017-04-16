@@ -8,7 +8,7 @@ using Decision_Tree_ALg.AlgLogicLib;
 
 namespace Decision_Tree_ALg
 {
-    class Program
+    class StartUp
     {
         static void Main(string[] args)
         {

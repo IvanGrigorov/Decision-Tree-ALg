@@ -82,6 +82,14 @@ namespace Decision_Tree_ALg.TreeStructures
 
         public string DeclareLeafInf(int[] negativeAndPositiveAmount)
         {
+            if ((negativeAndPositiveAmount[0] < 0) || (negativeAndPositiveAmount[1] < 0))
+            {
+                throw new ArgumentOutOfRangeException("There is no possibility positive or negative examples amounts to be negative.");
+            }
+            if ((negativeAndPositiveAmount[0] == 0) && (negativeAndPositiveAmount[1] == 0))
+            {
+                throw new ArgumentException("There is no possibility both positive and negative examples amounts to be zero.");
+            }
             if (negativeAndPositiveAmount[0] == 0)
             {
                 return "Yes";

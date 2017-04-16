@@ -56,7 +56,24 @@ namespace DecisionTreeTests.TreeStructures
 
         // Start Testing DeclareLeafInf Method
         [TestCase(new int[] { 1, 1 })]
+        [TestCase(new int[] { 5, 16 })]
+        [TestCase(new int[] { 16, 5 })]
         public void TreeNode_DeclareLeafInf_ShouldReturnNodeWhenBothPositiveAndNegaitiveExamplesAmountAreDifferentFromZero(int[] positiveAndNegativeExamplesAmount)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+
+            // Act
+            var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
+
+            // Assert
+            Assert.AreEqual("Node", result);
+        }
+
+        [TestCase(new int[] { 0, 1 })]
+        [TestCase(new int[] { 0, 5 })]
+        [TestCase(new int[] { 0, 30 })]
+        public void TreeNode_DeclareLeafInf_ShouldReturnYesWhenFirstElementIsZero(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
             var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
@@ -66,8 +83,46 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Assert
-            Assert.AreEqual("Node", result);
+            Assert.AreEqual("Yes", result);
         }
+
+        [TestCase(new int[] { 0, 0 })]
+        public void TreeNode_DeclareLeafInf_ShouldThrowArgumentExceptionWhenBothPositiveAndNegativeExamplesAmountsAreZero(int[] positiveAndNegativeExamplesAmount)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+
+            // Act && Assert
+            Assert.Throws<ArgumentException>(() => treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount));
+        }
+
+
+        [TestCase(new int[] { -1, -1 })]
+        public void TreeNode_DeclareLeafInf_ShouldThrowArgumentExceptionWhenBothPositiveAndNegativeExamplesAmountsAreNegative(int[] positiveAndNegativeExamplesAmount)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+
+            // Act && Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount));
+        }
+
+        [TestCase(new int[] { 1, 0})]
+        [TestCase(new int[] { 5, 0 })]
+        [TestCase(new int[] { 30, 0 })]
+        public void TreeNode_DeclareLeafInf_ShouldReturnNoWhenSecondElementIsZero(int[] positiveAndNegativeExamplesAmount)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+
+            // Act
+            var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
+
+
+            // Assert
+            Assert.AreEqual("No", result);
+        }
+
 
 
     }

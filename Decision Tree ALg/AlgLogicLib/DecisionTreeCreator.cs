@@ -8,11 +8,24 @@ using System;
 
 namespace Decision_Tree_ALg.AlgLogicLib
 {
+    /// <summary>
+    /// The class is responsible for creating all tree branches, nodes and leaves
+    /// It also contains methods to calculate the entropy and information gain for all nodes
+    /// </summary>
     class DecisionTreeCreator
     {
 
         public TreeNode RootNode { get; set; }
 
+        // TODO: Separate the algorithm calculation methods from the class
+
+        /// <summary>
+        /// The Method calculates the entropy for current node(Feature or Attribute)
+        /// </summary>
+        /// <param name="arrayWithAmountsOfDifferentClassificationValues">The array should have length equal to the possible outcomes
+        /// value[0] - amount of examples with first outcome, etc. </param>
+        /// <param name="amountOfTrainingExamples">Gives the amount of all examples used so far</param>
+        /// <returns>The Entropy for the node</returns>
         public static double calculateEntropy(int[] arrayWithAmountsOfDifferentClassificationValues, 
             int amountOfTrainingExamples)
         {
@@ -28,8 +41,18 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 entropy -= numberOfLogarithm * Math.Log(numberOfLogarithm, amountsOfValuesInArray);
             }
             return entropy;
-        } 
+        }
 
+        /// <summary>
+        /// The Method calculates the Information Gain for current node(Feature or Attribute)
+        /// </summary>
+        /// <param name="entropyForClassificationFactor">Entropy based on examples used so far (before the new node)</param>
+        /// <param name="afterClassificationVlaues">Array with length equal to the amount of possible outcomes - each[i] contains 
+        /// the amount of examples with this outcome (based on examples used so far)</param>
+        /// <param name="amountOfExamplesUsed">Amount of examples used so far</param>
+        /// <param name="diferentOutcomesafterClassValues">Matrix[i] - All possible outcomes - Matrix[i][0] - Contains amount of positive examples after this outcome(i)
+        /// Matrix[i][1] - Contains amount of negative examples after this outcome(i)</param>
+        /// <returns>The Information Gain for the Node</returns>
         public static double calculateInformationGain(double entropyForClassificationFactor, int[] afterClassificationVlaues, int amountOfExamplesUsed, 
             int[][] diferentOutcomesafterClassValues )        
         {
@@ -88,8 +111,18 @@ namespace Decision_Tree_ALg.AlgLogicLib
             
             foreach (var outcome in currentNode.PossibleOutcomes)
             {
+                string leafInf = "";
                 int[] possitiveAndNegativeExamplesAfterOutcome = CalculateNegativeAndPositiveAmountOfExamples(currentNode.ReturnAllExamplesAfterValueCondition(currentNode.Name, outcome));
-                string leafInf = currentNode.DeclareLeafInf(possitiveAndNegativeExamplesAfterOutcome);
+                try {  leafInf = currentNode.DeclareLeafInf(possitiveAndNegativeExamplesAfterOutcome); }
+                catch (ArgumentOutOfRangeException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    Environment.Exit(0);
+                }
+                catch (ArgumentException)
+                {
+                    leafInf = currentNode.DeclareLeafInf(CalculateNegativeAndPositiveAmountOfExamples(currentNode.UsedExamplesSoFar));
+                }
                 if (leafInf != "Node")
                 {
                     currentNode.LeafInf.Add(outcome, leafInf);
