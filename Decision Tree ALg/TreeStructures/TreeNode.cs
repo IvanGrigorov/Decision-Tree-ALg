@@ -13,12 +13,12 @@ namespace Decision_Tree_ALg.TreeStructures
         public double Entropy { get; set; }
         public double InfGain { get; set; }
         public string Name { get; set; }
-        public Dictionary<string, string>[] RouteToNode { get; set; }
+        public IDictionary<string, string>[] RouteToNode { get; set; }
         public IDataEntity[] UsedExamplesSoFar { get; set; } = InitialConfig.GetInstance().InitialExamples; 
         public string[] PossibleOutcomes { get; set;}
-        public List<TreeNode> Children { get; set; } = new List<TreeNode>();
+        public IList<TreeNode> Children { get; set; } = new List<TreeNode>();
         public string ParentTransition { get; set; } = null;
-        public Dictionary<string, string> LeafInf { get; set; } = new Dictionary<string, string>(); 
+        public IDictionary<string, string> LeafInf { get; set; } = new Dictionary<string, string>(); 
         public bool IsUsed { get; set; } = false;
 
 

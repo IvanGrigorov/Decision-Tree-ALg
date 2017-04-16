@@ -13,6 +13,9 @@ namespace DecisionTreeTests.TreeStructures
         //  { "WindClassificated", new string[] { "Strong", "Weak" } },
         //  { "ClassifiedResult", new string[] { "Yes", "No" } },
 
+
+        // Start Testing ReturnAllExamplesAfterValue Method
+
         [TestCase("RainTypeClassificated", "InvalidOutcome")]
         public void TreeNode_ReturnAllExamplesAfterValue_ShouldReturnEmptyArrayAfterNoMatch(string feature, string outcome)
         {
@@ -50,6 +53,22 @@ namespace DecisionTreeTests.TreeStructures
             // Assert
             Assert.AreEqual(5, result.Length);
         }
+
+        // Start Testing DeclareLeafInf Method
+        [TestCase(new int[] { 1, 1 })]
+        public void TreeNode_DeclareLeafInf_ShouldReturnNodeWhenBothPositiveAndNegaitiveExamplesAmountAreDifferentFromZero(int[] positiveAndNegativeExamplesAmount)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+
+            // Act
+            var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
+
+
+            // Assert
+            Assert.AreEqual("Node", result);
+        }
+
 
     }
 }
