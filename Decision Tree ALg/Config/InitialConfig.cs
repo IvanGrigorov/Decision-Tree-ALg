@@ -44,9 +44,9 @@ namespace Decision_Tree_ALg.Config
 
         };
 
-        public static string NameOfDataClass { get; set; } = "Decision_Tree_ALg.DataEntities.DataEntity";
+        //public static string NameOfDataClass { get; set; } = "Decision_Tree_ALg.DataEntities.DataEntity";
 
-        public static Type TypeOfObject { get { return Type.GetType(NameOfDataClass); } }
+        public static Type TypeOfObject { get { return typeof(DataEntity); } }
 
         private InitialConfig() 
         {
