@@ -23,7 +23,7 @@ namespace Decision_Tree_ALg
             // Add this option in configuration 
 
             String resultsPathFile = "../../Results/Tree-" + dateTime.ToString().Replace("/", "-") + ".txt";
-            exporter.exportTree(resultsPathFile, treeCreator.RootNode);
+            exporter.ExportTree(resultsPathFile, treeCreator.RootNode);
         }
     }
 }

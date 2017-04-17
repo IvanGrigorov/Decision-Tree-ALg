@@ -9,8 +9,12 @@ using System.Reflection;
 
 namespace Decision_Tree_ALg.Config
 {
+    /// <summary>
+    /// The Main File to configure all system requirements 
+    /// </summary>
     class InitialConfig
     {
+        private static readonly Lazy<InitialConfig> lazyConfig = new Lazy<InitialConfig>(() => new InitialConfig());
         private static string projectName = Assembly.GetCallingAssembly().GetName().Name;
         private static string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
@@ -24,7 +28,7 @@ namespace Decision_Tree_ALg.Config
         // These can be changed according to the different training data  
 
         // Store all feature names and number of possible outcomes
-        private Dictionary<string, int> FeatureNames = new Dictionary<string, int>()
+        private IDictionary<string, int> FeatureNames = new Dictionary<string, int>()
             {
                 { "RainTypeClassificated", 3},
                 { "TempClassificated", 3},
@@ -34,7 +38,7 @@ namespace Decision_Tree_ALg.Config
 
             };
 
-        private Dictionary<string, string[]> FeatureOutcomes = new Dictionary<string, string[]>()
+        public IDictionary<string, string[]> FeatureOutcomes = new Dictionary<string, string[]>()
         {
             { "RainTypeClassificated", new string[] { "Low", "High", "Normal" } },
             { "TempClassificated", new string[] { "Hot", "Mild", "Cool" } },
@@ -44,7 +48,6 @@ namespace Decision_Tree_ALg.Config
 
         };
 
-        //public static string NameOfDataClass { get; set; } = "Decision_Tree_ALg.DataEntities.DataEntity";
 
         public static Type TypeOfObject { get { return typeof(DataEntity); } }
 
@@ -55,16 +58,17 @@ namespace Decision_Tree_ALg.Config
         public TreeNode[] NodesToBeInserted { get; set; } 
 
         // Create Singleton case to use only one version of the configuration
+        // Lazy evaluation for less memory consumption
         public static InitialConfig GetInstance()
         {
             if (configuration == null)
             {
-                configuration = new InitialConfig();
+                configuration = lazyConfig.Value;
                 configuration.NodesToBeInserted = new TreeNode[configuration.NumberOfFeatures];
                 for (int index = 0; index < configuration.NumberOfFeatures; index++)
                 {
                     var tempFeatureInfo = configuration.FeatureOutcomes.ElementAt(index);
-                    configuration.NodesToBeInserted[index] = new TreeNode(tempFeatureInfo.Key, tempFeatureInfo.Value);
+                    configuration.NodesToBeInserted[index] = new TreeNode(tempFeatureInfo.Key, tempFeatureInfo.Value, new List<ItreeNode>(), new Dictionary<string, string>());
                 }
 
             }

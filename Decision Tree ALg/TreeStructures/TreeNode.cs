@@ -1,63 +1,71 @@
-﻿using Decision_Tree_ALg.DataEntities;
-using System.Collections.Generic;
-using Decision_Tree_ALg.AlgLogicLib;
+﻿using Decision_Tree_ALg.AlgLogicLib;
 using Decision_Tree_ALg.Config;
+using Decision_Tree_ALg.DataEntities;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Decision_Tree_ALg.TreeStructures
 {
-    public class TreeNode
+    public class TreeNode : ItreeNode
     {
 
         public double Entropy { get; set; }
         public double InfGain { get; set; }
         public string Name { get; set; }
         public IDictionary<string, string>[] RouteToNode { get; set; }
-        public IDataEntity[] UsedExamplesSoFar { get; set; } = InitialConfig.GetInstance().InitialExamples; 
-        public string[] PossibleOutcomes { get; set;}
-        public IList<TreeNode> Children { get; set; } = new List<TreeNode>();
-        public string ParentTransition { get; set; } = null;
-        public IDictionary<string, string> LeafInf { get; set; } = new Dictionary<string, string>(); 
+        public IDataEntity[] UsedExamplesSoFar { get; set; } = InitialConfig.GetInstance().InitialExamples;
+        public string[] PossibleOutcomes { get; set; }
+        public ICollection<ItreeNode> Children { get; set; }
+        public string ParentTransition { get; set; }
+        public IDictionary<string, string> LeafInf { get; set; }
         public bool IsUsed { get; set; } = false;
 
 
         // Initially entropy and infGain can be 0
-        public TreeNode(string name, string[] outcomes, Dictionary<string, string>[] routeToNode = null, 
+        public TreeNode(string name, string[] outcomes, ICollection<ItreeNode> children, IDictionary<string, string> leafInf, IDictionary<string, string>[] routeToNode = null,
             double entropy = 0, double infGain = 0, bool isUsed = false)
         {
+            this.LeafInf = leafInf;
             this.Entropy = entropy;
             this.InfGain = infGain;
             this.IsUsed = isUsed;
             this.Name = name;
             this.RouteToNode = routeToNode;
             this.PossibleOutcomes = outcomes;
+            this.Children = children;
         }
 
         public void UpdateEntropy(int[] arrayWithAmountsOfDifferentClassificationValues,
             int amountOfTrainingExamples)
         {
-            this.Entropy =  DecisionTreeCreator.calculateEntropy(arrayWithAmountsOfDifferentClassificationValues,
+            this.Entropy = DecisionTreeCalculator.CalculateEntropy(arrayWithAmountsOfDifferentClassificationValues,
                 amountOfTrainingExamples);
         }
         public void UpdateInfGain(double entropyForClassificationFactor, int[] afterClassificationVlaues, int amountOfExamplesUsed,
             int[][] diferentOutcomesafterClassValues)
         {
             //TODO: complete the method
-            this.InfGain = DecisionTreeCreator.calculateInformationGain(entropyForClassificationFactor, afterClassificationVlaues,  amountOfExamplesUsed,
+            this.InfGain = DecisionTreeCalculator.CalculateInformationGain(entropyForClassificationFactor, afterClassificationVlaues, amountOfExamplesUsed,
             diferentOutcomesafterClassValues);
         }
 
 
 
-        public int calculateAmountOfExmplesWithSpecificProperties(string nameOfFactor, string outcome)
-        {
+        public int CalculateAmountOfExmplesWithSpecificProperties(string nameOfFactor, string outcome)
+        {            
             int count = 0;
             foreach (var example in this.UsedExamplesSoFar)
             {
                 if (example[nameOfFactor] == null)
                 {
                     throw new NullReferenceException("Trying to invoke property which doesn't exist. Check your parameter value to correspond with DataEntity properties.");
+                }
+                string[] possibleOutcomesForExample;
+                InitialConfig.GetInstance().FeatureOutcomes.TryGetValue(nameOfFactor, out possibleOutcomesForExample);
+                if (!possibleOutcomesForExample.Any(s => s.Equals(outcome)))
+                {
+                    throw new ArgumentException("The outcome passed as parameter is not valid for the specified feature(Attribute).");
                 }
                 if ((string)example[nameOfFactor] == outcome)
                 {
@@ -72,7 +80,7 @@ namespace Decision_Tree_ALg.TreeStructures
             List<IDataEntity> tmpListOfExamples = new List<IDataEntity>();
             foreach (var example in this.UsedExamplesSoFar)
             {
-                if ((string) example[feature] == outcome)
+                if ((string)example[feature] == outcome)
                 {
                     tmpListOfExamples.Add(example);
                 }

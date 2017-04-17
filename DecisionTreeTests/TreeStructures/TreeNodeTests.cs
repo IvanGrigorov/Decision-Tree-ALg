@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Decision_Tree_ALg.TreeStructures;
 using System;
+using System.Collections.Generic;
 
 namespace DecisionTreeTests.TreeStructures
 {
@@ -20,7 +21,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_ReturnAllExamplesAfterValue_ShouldReturnEmptyArrayAfterNoMatch(string feature, string outcome)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act
             var result = treeNode.ReturnAllExamplesAfterValueCondition(feature, outcome);
@@ -33,7 +34,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_ReturnAllExamplesAfterValue_ShouldThrowArgumentExceptionWithInvalidFeatureName(string feature, string outcome)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
 
             // Act && Assert
@@ -44,7 +45,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_ReturnAllExamplesAfterValue_ShouldReturnCorrectIntOnMatch(string feature, string outcome)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act
             var result = treeNode.ReturnAllExamplesAfterValueCondition(feature, outcome);
@@ -61,7 +62,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_DeclareLeafInf_ShouldReturnNodeWhenBothPositiveAndNegaitiveExamplesAmountAreDifferentFromZero(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act
             var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
@@ -76,7 +77,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_DeclareLeafInf_ShouldReturnYesWhenFirstElementIsZero(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act
             var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
@@ -90,7 +91,7 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_DeclareLeafInf_ShouldThrowArgumentExceptionWhenBothPositiveAndNegativeExamplesAmountsAreZero(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act && Assert
             Assert.Throws<ArgumentException>(() => treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount));
@@ -101,19 +102,19 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_DeclareLeafInf_ShouldThrowArgumentExceptionWhenBothPositiveAndNegativeExamplesAmountsAreNegative(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act && Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount));
         }
 
-        [TestCase(new int[] { 1, 0})]
+        [TestCase(new int[] { 1, 0 })]
         [TestCase(new int[] { 5, 0 })]
         [TestCase(new int[] { 30, 0 })]
         public void TreeNode_DeclareLeafInf_ShouldReturnNoWhenSecondElementIsZero(int[] positiveAndNegativeExamplesAmount)
         {
             // Arrange
-            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" });
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act
             var result = treeNode.DeclareLeafInf(positiveAndNegativeExamplesAmount);
@@ -123,7 +124,26 @@ namespace DecisionTreeTests.TreeStructures
             Assert.AreEqual("No", result);
         }
 
+        [TestCase("InvalidFeature", "Low")]
+        [TestCase("InvalidFeature", "InvalidOutcome")]
+        public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldThrowNullArgumentExceptionWhenFeatureNameIsInvalid(string feature, string outcome)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
+            // Act && Assert
+            Assert.Throws<NullReferenceException>(() => treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome));
+        }
 
+        [TestCase("RainTypeClassificated", "Loww")]
+        [TestCase("RainTypeClassificated", "InvalidOutcome")]
+        public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldThrowArgumentExceptionAfterInvalidOutcome(string feature, string outcome)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
+
+            // Act && Assert
+            Assert.Throws<ArgumentException>(() => treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome));
+        }
     }
 }

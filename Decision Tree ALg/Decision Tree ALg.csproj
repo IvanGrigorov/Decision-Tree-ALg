@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgLogicLib\DecisionTreeCalculator.cs" />
     <Compile Include="AlgLogicLib\ITreeExporter.cs" />
     <Compile Include="AlgLogicLib\ATreeExporter.cs" />
     <Compile Include="AlgLogicLib\JSONTreeExporter.cs" />
@@ -64,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TreeStructures\ITreeNode.cs" />
     <Compile Include="TreeStructures\TreeNode.cs" />
     <Compile Include="ReadingLibrary\DataReader.cs" />
   </ItemGroup>
