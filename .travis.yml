@@ -1,9 +1,8 @@
-## Travis CI Integration
-
-language: c
-
+language: csharp
+solution: solution-name.sln
 install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
+  - nuget restore solution-name.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
-  - xbuild Artemis_Mono/Artemis_Mono.sln
-  - nunit-console Artemis_Mono/bin/Debug/ArtemisMonoUnitTests.dll
+  - xbuild /p:Configuration=Release solution-name.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./MyProject.Tests/bin/Release/MyProject.Tests.dll
