@@ -4,6 +4,6 @@ script:
 before_install:
   - sudo apt-get install nunit-console
 before_script:
-  - nuget restore solution-name.sln
+  - nuget restore Decision Tree Alg.sln
 after_script:
   - nunit-console DecisionTreeTests/bin/Debug/DecisionTreeTests.dll
