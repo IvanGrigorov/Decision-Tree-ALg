@@ -8,7 +8,7 @@ using System.Linq;
 namespace Decision_Tree_ALg.TreeStructures
 {
     public class TreeNode : ItreeNode
-    { 
+    {  
 
         public double Entropy { get; set; }
         public double InfGain { get; set; }
