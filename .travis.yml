@@ -6,4 +6,4 @@ before_install:
 before_script:
   - nuget restore Decision Tree Alg.sln
 after_script:
-  - nunit-console DecisionTreeTests/bin/Debug/DecisionTreeTests.dll  
+  - nunit-console DecisionTreeTests/bin/Debug/DecisionTreeTests.dll 
