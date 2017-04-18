@@ -1,8 +1,8 @@
 language: csharp
-solution: Decision-Tree-ALg.sln
+solution: Decision Tree ALg.sln
 install:
-  - nuget restore Decision-Tree-ALg.sln
+  - nuget restore Decision Tree ALg.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release Decision-Tree-ALg.sln
+  - xbuild /p:Configuration=Release Decision Tree ALg.sln
   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./DecisionTreeTests/bin/Release/DecisionTreeTests.dll 
