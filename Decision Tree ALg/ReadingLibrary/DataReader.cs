@@ -44,7 +44,7 @@ namespace Decision_Tree_ALg.ReadingLibrary
             var file = Properties.Resources.DataExamples;
             var streamAsLines = file.ToString().Split(new string[] { "\r\n" }, StringSplitOptions.None);
             foreach (var line in streamAsLines)
-            {
+            { 
                 string[] splitedData = DataPreparator.splitDataExamples(line);
                 var entity = (IDataEntity)Activator.CreateInstance(InitialConfig.TypeOfObject, splitedData);
                 dataEntities.Add(lineIndex, entity);
