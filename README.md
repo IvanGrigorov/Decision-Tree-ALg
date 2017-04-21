@@ -10,7 +10,7 @@ Creating a decision tree platform for different types of data. Currently only Bo
 
 ![alt tag](https://decision-tree-platform.visualstudio.com/_apis/public/build/definitions/8adcea37-f6d7-42ab-9dcc-d4fe29ed90b2/1/badge)
 
-[!(https://img.shields.io/badge/tests-passing-brightgreen.svg)](https://github.com/IvanGrigorov/Decision-Tree-ALg/tree/UnitTesting)
+[![Jenkins tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](https://github.com/IvanGrigorov/Decision-Tree-ALg/tree/UnitTesting)
 
 # DECISION TREE ALG PLATFORM 
 
