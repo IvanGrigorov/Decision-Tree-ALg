@@ -5,7 +5,7 @@ Creating a decision tree platform for different types of data. Currently only Bo
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0wggl5q6degruk4h/branch/master?svg=true)](https://ci.appveyor.com/project/IvanGrigorov/decision-tree-alg/branch/master)
 
-##Latest Build Statuses (Branches):
+## Latest Build Statuses (Branches):
 ### UnitTesting
 
 ![alt tag](https://decision-tree-platform.visualstudio.com/_apis/public/build/definitions/8adcea37-f6d7-42ab-9dcc-d4fe29ed90b2/1/badge)
