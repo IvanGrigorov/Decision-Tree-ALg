@@ -88,23 +88,21 @@ namespace Decision_Tree_ALg.TreeStructures
             return tmpListOfExamples.ToArray();
         }
 
-        public string DeclareLeafInf(int[] negativeAndPositiveAmount)
+        public string DeclareLeafInf(int[] amountsForDifferentExamples)
         {
-            if ((negativeAndPositiveAmount[0] < 0) || (negativeAndPositiveAmount[1] < 0))
+            if (amountsForDifferentExamples.Any(amount => amount < 0))
             {
                 throw new ArgumentOutOfRangeException("There is no possibility positive or negative examples amounts to be negative.");
             }
-            if ((negativeAndPositiveAmount[0] == 0) && (negativeAndPositiveAmount[1] == 0))
+            if (amountsForDifferentExamples.All(amount => amount == 0))
             {
                 throw new ArgumentException("There is no possibility both positive and negative examples amounts to be zero.");
             }
-            if (negativeAndPositiveAmount[0] == 0)
+            if (amountsForDifferentExamples.Any(amount => amount == 0))
             {
-                return "Yes";
-            }
-            if (negativeAndPositiveAmount[1] == 0)
-            {
-                return "No";
+                var classificationValues = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == "ClassifiedResult");
+                var indexOfNeededOutcome = Array.IndexOf(amountsForDifferentExamples, 0);
+                return classificationValues.Value[indexOfNeededOutcome];
             }
             else
             {

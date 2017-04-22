@@ -81,16 +81,10 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 }
                 if (availableNodes.ToArray().Length == 0)
                 {
-                    if (possitiveAndNegativeExamplesAfterOutcome[0] <= possitiveAndNegativeExamplesAfterOutcome[1])
-                    {
-                        currentNode.LeafInf.Add(outcome, "Yes");
-                        continue;
-                    }
-                    else
-                    {
-                        currentNode.LeafInf.Add(outcome, "No");
-                        continue;
-                    }
+                    int indexOfPossibleOutcomes = Array.IndexOf(possitiveAndNegativeExamplesAfterOutcome, possitiveAndNegativeExamplesAfterOutcome.Max());
+                    var outcomes = InitialConfig.GetInstance().FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == "ClassifiedResult");
+                    currentNode.LeafInf.Add(outcome, outcomes.Value[indexOfPossibleOutcomes]);
+                    continue;
                 }
 
                 var dataExamples = currentNode.UsedExamplesSoFar;
@@ -130,22 +124,26 @@ namespace Decision_Tree_ALg.AlgLogicLib
 
         public int[] CalculateNegativeAndPositiveAmountOfExamples(IDataEntity[] examples)
         {
-            int negativeExamples = 0;
-            int positiveExamples = 0;
+           // int negativeExamples = 0;
+           // int positiveExamples = 0;
+
+            string[] possibleClassifications = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == "ClassifiedResult").Value;
+
+            int amountOfPissibleClassifications = possibleClassifications.Length;
+            int[] result = new int[amountOfPissibleClassifications];
 
             foreach (var dataExample in examples)
             {
-                if (dataExample.ClassifiedResult == "No")
+                for (int i = 0; i < amountOfPissibleClassifications; i++)
                 {
-                    negativeExamples++;
-                }
-                else if (dataExample.ClassifiedResult == "Yes")
-                {
-                    positiveExamples++;
-
+                    if  (dataExample.ClassifiedResult == possibleClassifications[i])
+                    {
+                        result[i]++;
+                    }
                 }
             }
-            return new int[] { negativeExamples, positiveExamples };
+            return result;
+                //new int[] { negativeExamples, positiveExamples };
         }
 
         //public createLeavesFor
