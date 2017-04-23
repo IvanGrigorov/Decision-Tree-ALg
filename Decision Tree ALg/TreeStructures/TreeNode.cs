@@ -98,10 +98,10 @@ namespace Decision_Tree_ALg.TreeStructures
             {
                 throw new ArgumentException("There is no possibility both positive and negative examples amounts to be zero.");
             }
-            if (amountsForDifferentExamples.Any(amount => amount == 0))
+            if (amountsForDifferentExamples.Count(amount => amount != 0) == 1)
             {
                 var classificationValues = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == "ClassifiedResult");
-                var indexOfNeededOutcome = Array.IndexOf(amountsForDifferentExamples, 0);
+                var indexOfNeededOutcome = Array.FindIndex(amountsForDifferentExamples, value => value > 0);
                 return classificationValues.Value[indexOfNeededOutcome];
             }
             else
