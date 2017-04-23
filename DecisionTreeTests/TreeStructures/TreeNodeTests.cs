@@ -84,7 +84,7 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Assert
-            Assert.AreEqual("Yes", result);
+            Assert.AreEqual("No", result);
         }
 
         [TestCase(new int[] { 0, 0 })]
@@ -121,7 +121,7 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Assert
-            Assert.AreEqual("No", result);
+            Assert.AreEqual("Yes", result);
         }
 
         [TestCase("InvalidFeature", "Low")]

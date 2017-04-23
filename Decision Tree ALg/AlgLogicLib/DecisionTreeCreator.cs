@@ -82,7 +82,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 if (availableNodes.ToArray().Length == 0)
                 {
                     int indexOfPossibleOutcomes = Array.IndexOf(clasificatedExamplesAfterOutcome, clasificatedExamplesAfterOutcome.Max());
-                    var outcomes = InitialConfig.GetInstance().FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == "ClassifiedResult");
+                    var outcomes = InitialConfig.GetInstance().FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == InitialConfig.NameOfClassifiedFeature);
                     currentNode.LeafInf.Add(outcome, outcomes.Value[indexOfPossibleOutcomes]);
                     continue;
                 }
@@ -127,7 +127,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
            // int negativeExamples = 0;
            // int positiveExamples = 0;
 
-            string[] possibleClassifications = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == "ClassifiedResult").Value;
+            string[] possibleClassifications = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature).Value;
 
             int amountOfPissibleClassifications = possibleClassifications.Length;
             int[] result = new int[amountOfPissibleClassifications];

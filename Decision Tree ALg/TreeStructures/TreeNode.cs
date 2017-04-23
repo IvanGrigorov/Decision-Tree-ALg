@@ -100,7 +100,7 @@ namespace Decision_Tree_ALg.TreeStructures
             }
             if (amountsForDifferentExamples.Count(amount => amount != 0) == 1)
             {
-                var classificationValues = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == "ClassifiedResult");
+                var classificationValues = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature);
                 var indexOfNeededOutcome = Array.FindIndex(amountsForDifferentExamples, value => value > 0);
                 return classificationValues.Value[indexOfNeededOutcome];
             }
