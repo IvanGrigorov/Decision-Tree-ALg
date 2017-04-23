@@ -56,6 +56,11 @@ namespace DecisionTreeTests.TreeStructures
         }
 
         // Start Testing DeclareLeafInf Method
+        /// <summary>
+        /// In order to test this method remember what you have set in the Config file.
+        /// The Input Params strongly depend on the  number of classification outcomes set in the configuration :) 
+        /// </summary>
+
         [TestCase(new int[] { 1, 1 })]
         [TestCase(new int[] { 5, 16 })]
         [TestCase(new int[] { 16, 5 })]
@@ -124,6 +129,8 @@ namespace DecisionTreeTests.TreeStructures
             Assert.AreEqual("Yes", result);
         }
 
+        // Testing CalculateAmountOfExmplesWithSpecificProperties method 
+
         [TestCase("InvalidFeature", "Low")]
         [TestCase("InvalidFeature", "InvalidOutcome")]
         public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldThrowNullArgumentExceptionWhenFeatureNameIsInvalid(string feature, string outcome)
@@ -145,5 +152,38 @@ namespace DecisionTreeTests.TreeStructures
             // Act && Assert
             Assert.Throws<ArgumentException>(() => treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome));
         }
+
+        // Testing CalculateAmountOfExmplesWithSpecificProperties method 
+
+        [TestCase("RainTypeClassificated", "Low")]
+        public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldReturnCorrectAmountOnMatch(string feature, string outcome)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
+
+            // Act 
+            int amount = treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome);
+
+            // Assert 
+            Assert.AreEqual(5, amount);
+        }
+
+        [TestCase("HumidClassificated", "Low")]
+        public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldReturnZeroOnMissMatsch(string feature, string outcome)
+        {
+            // Arrange
+            var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
+
+            // Act 
+            int amount = treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome);
+
+            // Assert 
+            Assert.AreEqual(0, amount);
+        }
+
+        /// <remarks> 
+        /// Include Mock Testing 
+        /// <remarks> 
+
     }
 }
