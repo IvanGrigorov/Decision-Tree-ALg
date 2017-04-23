@@ -76,6 +76,7 @@
     <Folder Include="Results\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\DataExamples.txt" />
     <Content Include="TrainingData\DataExamples.txt" />
   </ItemGroup>

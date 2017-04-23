@@ -14,6 +14,10 @@ namespace Decision_Tree_ALg.Config
     /// </summary>
     class InitialConfig
     {
+
+        /// <summary>
+        /// This Section should not be modified
+        /// </summary>
         private static readonly Lazy<InitialConfig> lazyConfig = new Lazy<InitialConfig>(() => new InitialConfig());
         private static string projectName = Assembly.GetCallingAssembly().GetName().Name;
         private static string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
@@ -21,11 +25,14 @@ namespace Decision_Tree_ALg.Config
         private int NumberOfFeatures { get; set; } = 4;
         private static InitialConfig configuration;
 
+        public static string NameOfClassifiedFeature { get; } = "ClassifiedResult";
+
         // public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromFile(solutiondir + "/Decision Tree ALg/TrainingData/DataExamples.txt");
         public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromEmbeddedRessource();
 
-
-        // These can be changed according to the different training data  
+        /// <summary>
+        /// // These can be changed according to the different training data  
+        /// </summary>
 
         // Store all feature names and number of possible outcomes
         private IDictionary<string, int> FeatureNames = new Dictionary<string, int>()
@@ -34,7 +41,7 @@ namespace Decision_Tree_ALg.Config
                 { "TempClassificated", 3},
                 { "HumidClassificated", 3},
                 { "WindClassificated", 2},
-                { "ClassifiedResult", 2}
+                { NameOfClassifiedFeature , 2}
 
             };
 
@@ -44,7 +51,7 @@ namespace Decision_Tree_ALg.Config
             { "TempClassificated", new string[] { "Hot", "Mild", "Cool" } },
             { "HumidClassificated", new string[] { "Low", "High", "Normal" } },
             { "WindClassificated", new string[] { "Strong", "Weak" } },
-            { "ClassifiedResult", new string[] { "Yes", "No" } },
+            { NameOfClassifiedFeature, new string[] { "Yes", "No" } },
 
         };
 

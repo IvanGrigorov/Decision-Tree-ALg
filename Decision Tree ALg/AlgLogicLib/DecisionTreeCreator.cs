@@ -27,19 +27,19 @@ namespace Decision_Tree_ALg.AlgLogicLib
             /// First update of Inf Gain 
             foreach (var node in InitialConfig.GetInstance().NodesToBeInserted)
             {
-                node.UpdateEntropy(this.CalculateNegativeAndPositiveAmountOfExamples(dataExamples), dataExamples.Length);
+                node.UpdateEntropy(this.CalculateAmountOfExamplesWithDifferentClassifications(dataExamples), dataExamples.Length);
 
                 /// calculate the examples which contain specific value
                 int[] storeAmountOfOutcomeValueHits = new int[node.PossibleOutcomes.Length];
-                int[][] positiveAndNegativeExamplesAfterSpecificValue = new int[node.PossibleOutcomes.Length][];
+                int[][] classificatedeExamplesAfterSpecificValue = new int[node.PossibleOutcomes.Length][];
                 for (int i = 0; i < node.PossibleOutcomes.Length; i++)
                 {
                     storeAmountOfOutcomeValueHits[i] = node.CalculateAmountOfExmplesWithSpecificProperties(node.Name, node.PossibleOutcomes[i]);
                     var examplesAfterOutcomeValue = node.ReturnAllExamplesAfterValueCondition(node.Name, node.PossibleOutcomes[i]); 
-                    positiveAndNegativeExamplesAfterSpecificValue[i] = CalculateNegativeAndPositiveAmountOfExamples(examplesAfterOutcomeValue);
+                    classificatedeExamplesAfterSpecificValue[i] = CalculateAmountOfExamplesWithDifferentClassifications(examplesAfterOutcomeValue);
                 }
 
-                node.UpdateInfGain(node.Entropy, storeAmountOfOutcomeValueHits, node.UsedExamplesSoFar.Length, positiveAndNegativeExamplesAfterSpecificValue);
+                node.UpdateInfGain(node.Entropy, storeAmountOfOutcomeValueHits, node.UsedExamplesSoFar.Length, classificatedeExamplesAfterSpecificValue);
                 Console.WriteLine();
             }
 
@@ -59,10 +59,10 @@ namespace Decision_Tree_ALg.AlgLogicLib
             foreach (var outcome in currentNode.PossibleOutcomes)
             {
                 string leafInf = string.Empty;
-                int[] possitiveAndNegativeExamplesAfterOutcome = CalculateNegativeAndPositiveAmountOfExamples(currentNode.ReturnAllExamplesAfterValueCondition(currentNode.Name, outcome));
+                int[] clasificatedExamplesAfterOutcome = CalculateAmountOfExamplesWithDifferentClassifications(currentNode.ReturnAllExamplesAfterValueCondition(currentNode.Name, outcome));
                 try
                 {
-                    leafInf = currentNode.DeclareLeafInf(possitiveAndNegativeExamplesAfterOutcome);
+                    leafInf = currentNode.DeclareLeafInf(clasificatedExamplesAfterOutcome);
                 }
                 catch (ArgumentOutOfRangeException exception)
                 {
@@ -71,7 +71,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 }
                 catch (ArgumentException)
                 {
-                    leafInf = currentNode.DeclareLeafInf(CalculateNegativeAndPositiveAmountOfExamples(currentNode.UsedExamplesSoFar));
+                    leafInf = currentNode.DeclareLeafInf(CalculateAmountOfExamplesWithDifferentClassifications(currentNode.UsedExamplesSoFar));
 
                 }
                 if (leafInf != "Node")
@@ -81,16 +81,10 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 }
                 if (availableNodes.ToArray().Length == 0)
                 {
-                    if (possitiveAndNegativeExamplesAfterOutcome[0] <= possitiveAndNegativeExamplesAfterOutcome[1])
-                    {
-                        currentNode.LeafInf.Add(outcome, "Yes");
-                        continue;
-                    }
-                    else
-                    {
-                        currentNode.LeafInf.Add(outcome, "No");
-                        continue;
-                    }
+                    int indexOfPossibleOutcomes = Array.IndexOf(clasificatedExamplesAfterOutcome, clasificatedExamplesAfterOutcome.Max());
+                    var outcomes = InitialConfig.GetInstance().FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == InitialConfig.NameOfClassifiedFeature);
+                    currentNode.LeafInf.Add(outcome, outcomes.Value[indexOfPossibleOutcomes]);
+                    continue;
                 }
 
                 var dataExamples = currentNode.UsedExamplesSoFar;
@@ -101,19 +95,19 @@ namespace Decision_Tree_ALg.AlgLogicLib
                     {
                         node.UsedExamplesSoFar = dataExamples;
                         node.UsedExamplesSoFar = node.ReturnAllExamplesAfterValueCondition(currentNode.Name, outcome);
-                        node.UpdateEntropy(this.CalculateNegativeAndPositiveAmountOfExamples(node.UsedExamplesSoFar), node.UsedExamplesSoFar.Length);
+                        node.UpdateEntropy(this.CalculateAmountOfExamplesWithDifferentClassifications(node.UsedExamplesSoFar), node.UsedExamplesSoFar.Length);
 
                         // calculate the examples which contain specific value
                         int[] storeAmountOfOutcomeValueHits = new int[node.PossibleOutcomes.Length];
-                        int[][] positiveAndNegativeExamplesAfterSpecificValue = new int[node.PossibleOutcomes.Length][];
+                        int[][] classificatedExamplesAfterSpecificValue = new int[node.PossibleOutcomes.Length][];
                         for (int i = 0; i < node.PossibleOutcomes.Length; i++)
                         {
                             storeAmountOfOutcomeValueHits[i] = node.CalculateAmountOfExmplesWithSpecificProperties(node.Name, node.PossibleOutcomes[i]);
                             var examplesAfterOutcomeValue = node.ReturnAllExamplesAfterValueCondition(node.Name, node.PossibleOutcomes[i]);
-                            positiveAndNegativeExamplesAfterSpecificValue[i] = CalculateNegativeAndPositiveAmountOfExamples(examplesAfterOutcomeValue);
+                            classificatedExamplesAfterSpecificValue[i] = CalculateAmountOfExamplesWithDifferentClassifications(examplesAfterOutcomeValue);
                         }
 
-                        node.UpdateInfGain(node.Entropy, storeAmountOfOutcomeValueHits, node.UsedExamplesSoFar.Length, positiveAndNegativeExamplesAfterSpecificValue);                   
+                        node.UpdateInfGain(node.Entropy, storeAmountOfOutcomeValueHits, node.UsedExamplesSoFar.Length, classificatedExamplesAfterSpecificValue);                   
                     }
                 }
 
@@ -128,24 +122,28 @@ namespace Decision_Tree_ALg.AlgLogicLib
             }       
         }
 
-        public int[] CalculateNegativeAndPositiveAmountOfExamples(IDataEntity[] examples)
+        public int[] CalculateAmountOfExamplesWithDifferentClassifications(IDataEntity[] examples)
         {
-            int negativeExamples = 0;
-            int positiveExamples = 0;
+           // int negativeExamples = 0;
+           // int positiveExamples = 0;
+
+            string[] possibleClassifications = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature).Value;
+
+            int amountOfPissibleClassifications = possibleClassifications.Length;
+            int[] result = new int[amountOfPissibleClassifications];
 
             foreach (var dataExample in examples)
             {
-                if (dataExample.ClassifiedResult == "No")
+                for (int i = 0; i < amountOfPissibleClassifications; i++)
                 {
-                    negativeExamples++;
-                }
-                else if (dataExample.ClassifiedResult == "Yes")
-                {
-                    positiveExamples++;
-
+                    if  (dataExample.ClassifiedResult == possibleClassifications[i])
+                    {
+                        result[i]++;
+                    }
                 }
             }
-            return new int[] { negativeExamples, positiveExamples };
+            return result;
+                //new int[] { negativeExamples, positiveExamples };
         }
 
         //public createLeavesFor
