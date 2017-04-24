@@ -59,6 +59,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReadingLibrary\DataReaderTests.cs" />
     <Compile Include="TreeStructures\TreeNodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +84,9 @@
     <None Include="..\Decision Tree ALg\Resources\DataExamples.txt">
       <Link>Resources\DataExamples.txt</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TrainingData\DataExamples.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

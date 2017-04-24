@@ -181,6 +181,10 @@ namespace DecisionTreeTests.TreeStructures
             Assert.AreEqual(0, amount);
         }
 
+        /// <remarks>
+        /// Tests for UpdateInfo and UpdateInfGain should be included
+        /// </remarks>
+        /// 
         /// <remarks> 
         /// Include Mock Testing 
         /// <remarks> 

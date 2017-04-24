@@ -2,7 +2,7 @@
 
 namespace Decision_Tree_ALg.DataEntities
 {
-    abstract class ADataEntity : IDataEntity
+    public abstract class ADataEntity : IDataEntity
     {
              
         public string ClassifiedResult { get; set; }

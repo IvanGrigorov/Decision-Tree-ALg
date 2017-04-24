@@ -28,7 +28,7 @@ namespace Decision_Tree_ALg.Config
         public static string NameOfClassifiedFeature { get; } = "ClassifiedResult";
 
         // public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromFile(solutiondir + "/Decision Tree ALg/TrainingData/DataExamples.txt");
-        public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromEmbeddedRessource();
+        public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromEmbeddedRessource(TypeOfObject);
 
         /// <summary>
         /// // These can be changed according to the different training data  
@@ -56,7 +56,7 @@ namespace Decision_Tree_ALg.Config
         };
 
 
-        public static Type TypeOfObject { get { return typeof(DataEntity); } }
+        private static Type TypeOfObject { get { return typeof(DataEntity); } }
 
         private InitialConfig() 
         {
