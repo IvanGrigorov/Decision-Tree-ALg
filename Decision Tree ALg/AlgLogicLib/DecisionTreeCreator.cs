@@ -45,10 +45,10 @@ namespace Decision_Tree_ALg.AlgLogicLib
 
             // Initially all nodes are ready to be inserted
             InsertRootNode(InitialConfig.GetInstance().NodesToBeInserted);
-            ContinueFillingTheTreeRecursivly(this.RootNode);
+            ContinueFillingTheTreeRecursivly(this.RootNode, InitialConfig.GetInstance().IsMemoryOptimized);
         }
 
-        public void ContinueFillingTheTreeRecursivly(ItreeNode currentNode)
+        public void ContinueFillingTheTreeRecursivly(ItreeNode currentNode, bool isMemoryOptimized)
         {
             // With more complex and bigger amount of possible Nodes it might be better
             // To optimize this by splitting used and unused nodes in order not to 
@@ -118,8 +118,12 @@ namespace Decision_Tree_ALg.AlgLogicLib
             }
             foreach (var child in currentNode.Children)
             {
-                ContinueFillingTheTreeRecursivly(child);
+                ContinueFillingTheTreeRecursivly(child, isMemoryOptimized);
             }       
+            if (isMemoryOptimized)
+            {
+                currentNode.UsedExamplesSoFar = null; 
+            }
         }
 
         public int[] CalculateAmountOfExamplesWithDifferentClassifications(IDataEntity[] examples)

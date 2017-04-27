@@ -12,6 +12,12 @@ namespace DecisionTreeTests.ReadingLibrary
     [TestFixture]
     public class DataReaderTests
     {
+
+
+        /// <summary>
+        /// Testing ReturnAllExamplesFromFile method
+        /// </summary>
+
         [TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(IDataEntity))]
         [TestCase(@"C: \Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(ADataEntity))]
         public void DataReader_ReturnAllExamplesFromFile_ShouldReturnArgumentExceptionWhenTypeIsInterfaceOrAbstractClass(string dataFilePath, Type typeOfClassToCreate)
@@ -38,6 +44,30 @@ namespace DecisionTreeTests.ReadingLibrary
             // Act 
             // Arrange && Act && Assert 
             Assert.Throws<System.IO.FileNotFoundException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath, typeOfClassToCreate));
+        }
+
+
+        /// <summary>
+        /// Testing ReturnAllExamplesFromEmbeddedRessource method
+        /// </summary>
+
+        [TestCase(typeof(IDataEntity))]
+        [TestCase(typeof(ADataEntity))]
+        public void DataReader_ReturnAllExamplesFromEmbeddedRessource_ShouldReturnArgumentExceptionWhenTypeIsInterfaceOrAbstractClass(Type typeOfClassToCreate)
+        {
+            // Arrange 
+            // Act 
+            // Arrange && Act && Assert 
+            Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromEmbeddedRessource(typeOfClassToCreate));
+        }
+
+        [TestCase(typeof(DataEntity))]
+        public void DataReader_ReturnAllExamplesFromEmbeddedRessource_ShouldNotThrowWhenTypeIsClass(Type typeOfClassToCreate)
+        {
+            // Arrange 
+            // Act 
+            // Arrange && Act && Assert 
+            Assert.DoesNotThrow(() => DataReader.ReturnAllExamplesFromEmbeddedRessource(typeOfClassToCreate));
         }
 
     }
