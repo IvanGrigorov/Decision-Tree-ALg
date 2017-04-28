@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Decision_Tree_ALg.ReadingLibrary;
 using Decision_Tree_ALg.AlgLogicLib;
+using Decision_Tree_ALg.Config;
+using Decision_Tree_ALg.TreeStructures;
 
 namespace Decision_Tree_ALg
 {

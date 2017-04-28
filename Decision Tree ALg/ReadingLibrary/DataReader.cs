@@ -1,9 +1,7 @@
 ﻿using Decision_Tree_ALg.DataEntities;
-using System.Collections.Generic;
 using Decision_Tree_ALg.PrepareDataLib;
 using System;
-using Decision_Tree_ALg.Config;
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace Decision_Tree_ALg.ReadingLibrary
 {
@@ -50,6 +48,10 @@ namespace Decision_Tree_ALg.ReadingLibrary
             foreach (var line in streamAsLines)
             {  
                 string[] splitedData = DataPreparator.splitDataExamples(line);
+                if (typeOfClassToCreate.IsAbstract || typeOfClassToCreate.IsInterface)
+                {
+                    throw new ArgumentException("You cannot instantiate an Interface or an Abstract Class. Change the type in arguments.");
+                }
                 var entity = (IDataEntity)Activator.CreateInstance(typeOfClassToCreate, splitedData);
                 dataEntities.Add(lineIndex, entity);
                 //dataEntities.Add(lineIndex, line);
