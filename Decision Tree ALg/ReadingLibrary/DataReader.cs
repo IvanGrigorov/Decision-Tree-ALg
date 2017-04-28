@@ -1,15 +1,13 @@
 ﻿using Decision_Tree_ALg.DataEntities;
-using System.Collections.Generic;
 using Decision_Tree_ALg.PrepareDataLib;
 using System;
-using Decision_Tree_ALg.Config;
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace Decision_Tree_ALg.ReadingLibrary
 {
     public class DataReader
     {
-        public static IDataEntity[] ReturnAllExamplesFromFile(string dataFilePath)
+        public static IDataEntity[] ReturnAllExamplesFromFile(string dataFilePath, Type typeOfClassToCreate)
         {
             IDictionary<int, IDataEntity> dataEntities = new Dictionary<int, IDataEntity>();
 
@@ -23,7 +21,11 @@ namespace Decision_Tree_ALg.ReadingLibrary
             {
                 string[] splitedData = DataPreparator.splitDataExamples(line);
                 // Simple Factory type creation using Reflection
-                var entity = (IDataEntity) Activator.CreateInstance(InitialConfig.TypeOfObject, splitedData);
+                if (typeOfClassToCreate.IsAbstract || typeOfClassToCreate.IsInterface)
+                {
+                    throw new ArgumentException("You cannot instantiate an Interface or an Abstract Class. Change the type in arguments.");
+                }
+                var entity = (IDataEntity) Activator.CreateInstance(typeOfClassToCreate, splitedData);
                 dataEntities.Add(lineIndex, entity);
                 //dataEntities.Add(lineIndex, line);
                 lineIndex++;
@@ -35,9 +37,9 @@ namespace Decision_Tree_ALg.ReadingLibrary
             return dataEntitiesAsArray;
         }
 
-        public static IDataEntity[] ReturnAllExamplesFromEmbeddedRessource()
+        public static IDataEntity[] ReturnAllExamplesFromEmbeddedRessource(Type typeOfClassToCreate)
         {
-            Dictionary<int, IDataEntity> dataEntities = new Dictionary<int, IDataEntity>();
+            IDictionary<int, IDataEntity> dataEntities = new Dictionary<int, IDataEntity>();
 
             int lineIndex = 0;
             // Read the file and display it line by line.
@@ -46,7 +48,11 @@ namespace Decision_Tree_ALg.ReadingLibrary
             foreach (var line in streamAsLines)
             {  
                 string[] splitedData = DataPreparator.splitDataExamples(line);
-                var entity = (IDataEntity)Activator.CreateInstance(InitialConfig.TypeOfObject, splitedData);
+                if (typeOfClassToCreate.IsAbstract || typeOfClassToCreate.IsInterface)
+                {
+                    throw new ArgumentException("You cannot instantiate an Interface or an Abstract Class. Change the type in arguments.");
+                }
+                var entity = (IDataEntity)Activator.CreateInstance(typeOfClassToCreate, splitedData);
                 dataEntities.Add(lineIndex, entity);
                 //dataEntities.Add(lineIndex, line);
                 lineIndex++;

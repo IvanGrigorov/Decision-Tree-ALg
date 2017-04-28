@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Decision_Tree_ALg.DataEntities
 {
-    class DataEntity : ADataEntity, IDataEntity
+    public class DataEntity : ADataEntity, IDataEntity
     {
              
         public string WindClassificated { get;  set; }
