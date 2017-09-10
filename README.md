@@ -31,9 +31,15 @@ There is one config file, which is important for adjusting the algorithm with th
 
 See the [Wiki](https://github.com/IvanGrigorov/Decision-Tree-ALg/wiki) for more information about the configuration. 
 
+## Now Developing 
+----------------- 
+
+This is new version of product where there is no need to make any changes into the code, but the autonomous work remains. There is new "dll" library to use the console interaction, but can be easily be adjusted to use commands from other "API" - s. Here is small example how it works. ** This is stil an experimental branch ** 
+
+
+![](https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif)
+
 ## More Information: 
 ----------------------- 
 
 For more information, questions and ideas, you can contact with me: ivangrigorov9@gmail.com
-
-![](https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif)
