@@ -36,3 +36,4 @@ See the [Wiki](https://github.com/IvanGrigorov/Decision-Tree-ALg/wiki) for more 
 
 For more information, questions and ideas, you can contact with me: ivangrigorov9@gmail.com
 
+![](https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif)
