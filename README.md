@@ -36,5 +36,3 @@ See the [Wiki](https://github.com/IvanGrigorov/Decision-Tree-ALg/wiki) for more 
 
 For more information, questions and ideas, you can contact with me: ivangrigorov9@gmail.com
 
-
-![Video](Sep 10 2017 6-20 PM.webm)
