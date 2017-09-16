@@ -12,7 +12,7 @@ Creating a decision tree platform for different types of data. Currently only Bo
 
 [![Jenkins tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)](https://github.com/IvanGrigorov/Decision-Tree-ALg/tree/UnitTesting)
 
-### ConsoleInteraction (Experimental)
+### ConsoleInteraction (Experimental) 
 
 ![alt tag](https://decision-tree-platform.visualstudio.com/_apis/public/build/definitions/8adcea37-f6d7-42ab-9dcc-d4fe29ed90b2/1/badge)
 
@@ -99,7 +99,7 @@ Here is a small demo of the console intreface:
 ![](https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif)
 
 
-## Now Developing 
+## Now Developing     
 ----------------- 
 
 Most of the work is concentrated on the interface for now. However you can allways make in issue about any part of the project, but of course you must specify the description of it.   
