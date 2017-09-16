@@ -99,7 +99,7 @@ Here is a small demo of the console intreface:
 ![](https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif)
 
 
-## Now Developing     
+## Now Developing      
 ----------------- 
 
 Most of the work is concentrated on the interface for now. However you can allways make in issue about any part of the project, but of course you must specify the description of it.   
