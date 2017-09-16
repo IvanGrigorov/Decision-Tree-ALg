@@ -102,7 +102,7 @@ Here is a small demo of the console intreface:
 ## Now Developing 
 ----------------- 
 
-Most of the work is concentrated on the interface for now. However you can allways make in issue about any part of the project, but of course you must specify the description of it.  
+Most of the work is concentrated on the interface for now. However you can allways make in issue about any part of the project, but of course you must specify the description of it.   
 
 ## More Information: 
 ----------------------- 
