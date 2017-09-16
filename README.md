@@ -61,7 +61,7 @@ This requires no additional configuration. All of the work is done with the help
 The exmples file must have the following syntax: 
 ----------------------------------------------------- 
 
-RainTypeClassificated,TempClassificated,HumidClassificated,WindClassificated,ClassifiedResult
+RainTypeClassificated,TempClassificated,HumidClassificated,WindClassificated,ClassifiedResult\
 Low,Hot,High,Weak,No\
 Low,Hot,High,Strong,No\
 Normal,Hot,High,Weak,Yes\
