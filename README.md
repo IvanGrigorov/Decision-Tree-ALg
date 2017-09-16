@@ -50,13 +50,13 @@ This requires no additional configuration. All of the work is done with the help
 | ------- | ----------- |
 | exit | This exits the application |
 | help | This shows all the possible commands and their description |
-| load examples <pathfile> | load examples <pathfile> - loads the examples for training |
-| generate to <target path file> | generates the tree |
+| load examples \<pathfile\> | loads the examples for training |
+| generate to \<target path file\> | generates the tree |
 | minify | sets the tree to minified version |
 | maxify | sets the tree to maxified version |
-| load test examples <pathfile> | load examples for testing | 
+| load test examples \<pathfile\> | load examples for testing | 
 | test | tests the algorithm and returns the accuracy percentage |
-| generate config <pathfile> | Generates new configuration for the node structure |
+| generate config \<pathfile\> | Generates new configuration for the node structure |
 
 The exmples file must have the following syntax: 
 ----------------------------------------------------- 
