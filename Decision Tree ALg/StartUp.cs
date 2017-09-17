@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Decision_Tree_ALg.ReadingLibrary;
 using Decision_Tree_ALg.AlgLogicLib;
+using Decision_Tree_ALg.Config;
+using Decision_Tree_ALg.TreeStructures;
 
 namespace Decision_Tree_ALg
 {
-    class Program
+    class StartUp
     {
         static void Main(string[] args)
         {
@@ -23,7 +25,7 @@ namespace Decision_Tree_ALg
             // Add this option in configuration 
 
             String resultsPathFile = "../../Results/Tree-" + dateTime.ToString().Replace("/", "-") + ".txt";
-            exporter.exportTree(resultsPathFile, treeCreator.RootNode);
+            exporter.ExportTree(resultsPathFile, treeCreator.RootNode);
         }
     }
 }
