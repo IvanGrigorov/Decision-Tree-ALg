@@ -7,5 +7,6 @@ namespace Decision_Tree_ALg.AlgLogicLib
     public interface ITreeExporter
     {
         void ExportTree(string pathFileToSaveTheExport, ItreeNode node);
+        Regex Regex { get; }
     }
 }

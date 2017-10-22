@@ -5,7 +5,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
 {
     public abstract class ATreeExporter : ITreeExporter
     {
-        protected Regex Regex
+        public Regex Regex
         {
             get
             {
@@ -13,7 +13,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
             }
         }    
              
-        private string RegExPattern { get; } = @"(<|>|:|\||""|\\|\?|\*| )";
+        private string RegExPattern { get; } = @"(<|>|:|\||""|\\|\?|\*| |\/)";
 
         public abstract void ExportTree(string pathFileToSaveTheExport, ItreeNode node);               
     }

@@ -20,15 +20,26 @@ namespace Decision_Tree_ALg.Config
         private static readonly Lazy<InitialConfig> LazyConfig = new Lazy<InitialConfig>(() => new InitialConfig());
         private static string projectName = Assembly.GetCallingAssembly().GetName().Name;
         private static string solutiondir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-
-        private int NumberOfFeatures { get; set; } = 4;
+      
+        public static int NumberOfFeatures { get; set; } = 4;
 
         private static InitialConfig configuration;
 
-        public static string NameOfClassifiedFeature { get; } = "ClassifiedResult";
+        public static string NameOfClassifiedFeature { get; set; } = "ClassifiedResult";
+        /// <summary>
+        /// You may store it as default, when you are not using dialog inteface
+        /// </summary>
+        //public static string NameOfClassifiedFeature { get; set; } = "ClassifiedResult";
+
 
         // public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromFile(solutiondir + "/Decision Tree ALg/TrainingData/DataExamples.txt");
-        public IDataEntity[] InitialExamples { get; } = DataReader.ReturnAllExamplesFromEmbeddedRessource(TypeOfObject);
+        //public IDataEntity[] InitialExamples { get; set; } = DataReader.ReturnAllExamplesFromEmbeddedRessource(TypeOfObject);
+        public static IDataEntity[] InitialExamples { get; set; }
+        /// <summary>
+        /// You can call here DataReader directly to use the examples, when no dialog interface is used
+        /// </summary>
+        //public static IDataEntity[] InitialExamples { get; set; } = DataReader.<readMethod>(<path>)
+
 
         /// <summary>
         /// // These can be changed according to the different training data
@@ -43,18 +54,25 @@ namespace Decision_Tree_ALg.Config
                 { NameOfClassifiedFeature, 2 }
             };
 
-        public IDictionary<string, string[]> FeatureOutcomes { get; } = new Dictionary<string, string[]>()
-        {
-            { "RainTypeClassificated", new string[] { "Low", "High", "Normal" } },
-            { "TempClassificated", new string[] { "Hot", "Mild", "Cool" } },
-            { "HumidClassificated", new string[] { "Low", "High", "Normal" } },
-            { "WindClassificated", new string[] { "Strong", "Weak" } },
-            { NameOfClassifiedFeature, new string[] { "Yes", "No" } },
-        };
+        public static IDictionary<string, string[]> FeatureOutcomes { get; set; } = new Dictionary<string, string[]>();
+        /// <summary>
+        /// You may store it as default if you are not using dialog interface
+        /// </summary>
+        //public static IDictionary<string, string[]> FeatureOutcomes { get; set; } = new Dictionary<string, string[]>()
+        //{
+        //    { "RainTypeClassificated", new string[] { "Low", "High", "Normal" } },
+        //    { "TempClassificated", new string[] { "Hot", "Mild", "Cool" } },
+        //    { "HumidClassificated", new string[] { "Low", "High", "Normal" } },
+        //    { "WindClassificated", new string[] { "Strong", "Weak" } },
+        //    { NameOfClassifiedFeature, new string[] { "Yes", "No" } },
+        //};
+
 
         private static Type TypeOfObject { get { return typeof(DataEntity); } }
 
-        public bool IsMemoryOptimized { get; } = true;
+        public bool IsMemoryOptimized { get; set; } = true;
+
+        public string ResultDirectory { get; set; }
 
         private InitialConfig()
         {
@@ -66,13 +84,17 @@ namespace Decision_Tree_ALg.Config
         // Lazy evaluation for less memory consumption
         public static InitialConfig GetInstance()
         {
-            if (configuration == null)
+            if (InitialConfig.FeatureOutcomes.Count == 0)
+            {
+                throw new ArgumentNullException("Feature outcomes in the config cannot be null");
+            }
+            else if (configuration == null)
             {
                 configuration = LazyConfig.Value;
-                configuration.NodesToBeInserted = new TreeNode[configuration.NumberOfFeatures];
-                for (int index = 0; index < configuration.NumberOfFeatures; index++)
+                configuration.NodesToBeInserted = new TreeNode[InitialConfig.NumberOfFeatures];
+                for (int index = 0; index < InitialConfig.NumberOfFeatures; index++)
                 {
-                    var tempFeatureInfo = configuration.FeatureOutcomes.ElementAt(index);
+                    var tempFeatureInfo = InitialConfig.FeatureOutcomes.ElementAt(index);
                     configuration.NodesToBeInserted[index] = new TreeNode(tempFeatureInfo.Key, tempFeatureInfo.Value, new List<ItreeNode>(), new Dictionary<string, string>());
                 }
             }

@@ -23,7 +23,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
 
         public void StartBuilding() 
         {
-            var dataExamples = InitialConfig.GetInstance().InitialExamples;
+            var dataExamples = InitialConfig.InitialExamples;
             /// First update of Inf Gain 
             foreach (var node in InitialConfig.GetInstance().NodesToBeInserted)
             {
@@ -82,7 +82,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
                 if (availableNodes.ToArray().Length == 0)
                 {
                     int indexOfPossibleOutcomes = Array.IndexOf(clasificatedExamplesAfterOutcome, clasificatedExamplesAfterOutcome.Max());
-                    var outcomes = InitialConfig.GetInstance().FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == InitialConfig.NameOfClassifiedFeature);
+                    var outcomes = InitialConfig.FeatureOutcomes.First(tmpOutcome => tmpOutcome.Key == InitialConfig.NameOfClassifiedFeature);
                     currentNode.LeafInf.Add(outcome, outcomes.Value[indexOfPossibleOutcomes]);
                     continue;
                 }
@@ -131,7 +131,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
            // int negativeExamples = 0;
            // int positiveExamples = 0;
 
-            string[] possibleClassifications = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature).Value;
+            string[] possibleClassifications = InitialConfig.FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature).Value;
 
             int amountOfPissibleClassifications = possibleClassifications.Length;
             int[] result = new int[amountOfPissibleClassifications];
@@ -140,7 +140,7 @@ namespace Decision_Tree_ALg.AlgLogicLib
             {
                 for (int i = 0; i < amountOfPissibleClassifications; i++)
                 {
-                    if  (dataExample.ClassifiedResult == possibleClassifications[i])
+                    if  (((string)dataExample["ClassifiedResult"]).Equals(possibleClassifications[i]))
                     {
                         result[i]++;
                     }

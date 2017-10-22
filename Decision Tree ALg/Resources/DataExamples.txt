@@ -1,4 +1,5 @@
-﻿Low,Hot,High,Weak,No
+﻿RainTypeClassificated,TempClassificated,HumidClassificated,WindClassificated,ClassifiedResult
+Low,Hot,High,Weak,No
 Low,Hot,High,Strong,No
 Normal,Hot,High,Weak,Yes
 High,Mild,High,Weak,Yes

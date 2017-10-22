@@ -14,7 +14,7 @@ namespace Decision_Tree_ALg.TreeStructures
         public double InfGain { get; set; }
         public string Name { get; set; }
         public IDictionary<string, string>[] RouteToNode { get; set; }
-        public IDataEntity[] UsedExamplesSoFar { get; set; } = InitialConfig.GetInstance().InitialExamples;
+        public IDataEntity[] UsedExamplesSoFar { get; set; } 
         public string[] PossibleOutcomes { get; set; }
         public ICollection<ItreeNode> Children { get; set; }
         public string ParentTransition { get; set; }
@@ -34,6 +34,7 @@ namespace Decision_Tree_ALg.TreeStructures
             this.RouteToNode = routeToNode;
             this.PossibleOutcomes = outcomes;
             this.Children = children;
+            this.UsedExamplesSoFar = InitialConfig.InitialExamples;
         }
 
         public void UpdateEntropy(int[] arrayWithAmountsOfDifferentClassificationValues,
@@ -62,7 +63,7 @@ namespace Decision_Tree_ALg.TreeStructures
                     throw new NullReferenceException("Trying to invoke property which doesn't exist. Check your parameter value to correspond with DataEntity properties.");
                 }
                 string[] possibleOutcomesForExample;
-                InitialConfig.GetInstance().FeatureOutcomes.TryGetValue(nameOfFactor, out possibleOutcomesForExample);
+                InitialConfig.FeatureOutcomes.TryGetValue(nameOfFactor, out possibleOutcomesForExample);
                 if (!possibleOutcomesForExample.Any(s => s.Equals(outcome)))
                 {
                     throw new ArgumentException("The outcome passed as parameter is not valid for the specified feature(Attribute).");
@@ -100,7 +101,7 @@ namespace Decision_Tree_ALg.TreeStructures
             }
             if (amountsForDifferentExamples.Count(amount => amount != 0) == 1)
             {
-                var classificationValues = InitialConfig.GetInstance().FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature);
+                var classificationValues = InitialConfig.FeatureOutcomes.First(outcome => outcome.Key == InitialConfig.NameOfClassifiedFeature);
                 var indexOfNeededOutcome = Array.FindIndex(amountsForDifferentExamples, value => value > 0);
                 return classificationValues.Value[indexOfNeededOutcome];
             }

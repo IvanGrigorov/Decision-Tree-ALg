@@ -25,7 +25,7 @@ namespace DecisionTreeTests.ReadingLibrary
             // Arrange 
             // Act 
             // Arrange && Act && Assert 
-            Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath, typeOfClassToCreate));
+            Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath));
         }
 
         [TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(DataEntity))]
@@ -34,7 +34,7 @@ namespace DecisionTreeTests.ReadingLibrary
             // Arrange 
             // Act 
             // Arrange && Act && Assert 
-            Assert.DoesNotThrow(() => DataReader.ReturnAllExamplesFromFile(dataFilePath, typeOfClassToCreate));
+            Assert.DoesNotThrow(() => DataReader.ReturnAllExamplesFromFile(dataFilePath));
         }
 
         [TestCase(@"C:\Users\Ivan Grigorov\Desktop\InvalidFile.txt", typeof(DataEntity))]
@@ -43,7 +43,7 @@ namespace DecisionTreeTests.ReadingLibrary
             // Arrange 
             // Act 
             // Arrange && Act && Assert 
-            Assert.Throws<System.IO.FileNotFoundException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath, typeOfClassToCreate));
+            Assert.Throws<System.IO.FileNotFoundException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath));
         }
 
 

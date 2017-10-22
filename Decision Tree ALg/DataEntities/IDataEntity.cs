@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Decision_Tree_ALg.TreeStructures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,9 @@ namespace Decision_Tree_ALg.DataEntities
         // Get Property by indexing it with string
         object this[string nameOfProperty] { get; set; }
         string ClassifiedResult { get; set; }
+
+        String GetOutcomeForEntity(ItreeNode tree);
+               
 
     }
 }
