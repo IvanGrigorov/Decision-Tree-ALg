@@ -22,7 +22,14 @@ namespace ConsoleInteraction
                     return commandDetails;
                 }
             }
-            throw new ArgumentException("Command Not Found");
+            foreach (var regex in RegexContract.commandRecommendations)
+            {
+                if (Regex.IsMatch(commandInput, regex.Value))
+                {
+                    throw new ArgumentException("Mismatch - " + regex.Key);
+                }
+            }
+            throw new ArgumentException("Unexpected command");
             // TODO: Add suggestions  
         } 
 

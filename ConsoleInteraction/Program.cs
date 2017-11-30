@@ -33,6 +33,7 @@ namespace ConsoleInteraction
             {
                 //iteractionConfig.TutorialLoader.StartTutorial();
                 Console.WriteLine("Sorry the tutorial is not implemented yet. You can use the help command to see the available functionalities");
+                Console.WriteLine("You can either visit https://github.com/IvanGrigorov/Decision-Tree-ALg/blob/master/Sep%2010%202017%206-20%20PM.gif ");
                 Console.WriteLine("For more information you can write to ivangrigorov9 at gmail dot com");
                 InteractionConfig.LazyInteractionConfig.MoveToNextCommand();
             }

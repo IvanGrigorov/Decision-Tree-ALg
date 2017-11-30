@@ -2,12 +2,23 @@
 using Decision_Tree_ALg.TreeStructures;
 using System;
 using System.Collections.Generic;
+using ConsoleInteraction;
+using Decision_Tree_ALg.Config;
+using Decision_Tree_ALg.ReadingLibrary;
 
 namespace DecisionTreeTests.TreeStructures
 {
     [TestFixture]
     class TreeNodeTests
     {
+
+        [OneTimeSetUp]
+        public void BaseSetUp()
+        {
+            DataReader.ReadTreeNodeConfigFromFile(@"C:\Users\Ivan Grigorov\Desktop\ConfigTree.txt");
+
+            InitialConfig.InitialExamples = DataReader.ReturnAllExamplesFromFile(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt");
+        }
         //  { "RainTypeClassificated", new string[] { "Low", "High", "Normal" } },
         // { "TempClassificated", new string[] { "Hot", "Mild", "Cool" } },
         //  { "HumidClassificated", new string[] { "Low", "High", "Normal" } },
@@ -38,7 +49,7 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Act && Assert
-            Assert.Throws<NullReferenceException>(() => treeNode.ReturnAllExamplesAfterValueCondition(feature, outcome));
+            Assert.Throws<KeyNotFoundException>(() => treeNode.ReturnAllExamplesAfterValueCondition(feature, outcome));
         }
 
         [TestCase("RainTypeClassificated", "Low")]
@@ -89,7 +100,7 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Assert
-            Assert.AreEqual("No", result);
+            Assert.AreEqual("Yes", result);
         }
 
         [TestCase(new int[] { 0, 0 })]
@@ -126,7 +137,7 @@ namespace DecisionTreeTests.TreeStructures
 
 
             // Assert
-            Assert.AreEqual("Yes", result);
+            Assert.AreEqual("No", result);
         }
 
         // Testing CalculateAmountOfExmplesWithSpecificProperties method 
@@ -139,7 +150,7 @@ namespace DecisionTreeTests.TreeStructures
             var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act && Assert
-            Assert.Throws<NullReferenceException>(() => treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome));
+            Assert.Throws<KeyNotFoundException>(() => treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome));
         }
 
         [TestCase("RainTypeClassificated", "Loww")]
@@ -159,9 +170,12 @@ namespace DecisionTreeTests.TreeStructures
         public void TreeNode_CalculateAmountOfExmplesWithSpecificProperties_ShouldReturnCorrectAmountOnMatch(string feature, string outcome)
         {
             // Arrange
+            
+
             var treeNode = new TreeNode("TreeNodeExample", new string[] { "Low", "High", "Normal" }, new List<ItreeNode>(), new Dictionary<string, string>());
 
             // Act 
+          
             int amount = treeNode.CalculateAmountOfExmplesWithSpecificProperties(feature, outcome);
 
             // Assert 

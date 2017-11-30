@@ -59,13 +59,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReadingLibrary\DataReaderTests.cs" />
+    <Compile Include="Resources\DataReaderTests.cs" />
     <Compile Include="TreeStructures\TreeNodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleInteraction\ConsoleInteraction.csproj">
+      <Project>{26316464-746d-4429-84e0-dfffdcaa0488}</Project>
+      <Name>ConsoleInteraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Decision Tree ALg\Decision Tree ALg.csproj">
       <Project>{75ad0589-5ee2-4de7-a201-3f5759bc9d29}</Project>
       <Name>Decision Tree ALg</Name>
@@ -87,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TrainingData\DataExamples.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReadingLibrary\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

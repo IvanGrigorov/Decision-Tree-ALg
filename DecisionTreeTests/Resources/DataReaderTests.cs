@@ -18,15 +18,16 @@ namespace DecisionTreeTests.ReadingLibrary
         /// Testing ReturnAllExamplesFromFile method
         /// </summary>
 
-        [TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(IDataEntity))]
-        [TestCase(@"C: \Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(ADataEntity))]
-        public void DataReader_ReturnAllExamplesFromFile_ShouldReturnArgumentExceptionWhenTypeIsInterfaceOrAbstractClass(string dataFilePath, Type typeOfClassToCreate)
-        {
+        // Types are not used anymore, so this test is ducumented
+        //[TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(IDataEntity))]
+        //[TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(ADataEntity))]
+        //public void DataReader_ReturnAllExamplesFromFile_ShouldReturnArgumentExceptionWhenTypeIsInterfaceOrAbstractClass(string dataFilePath, Type typeOfClassToCreate)
+        //{
             // Arrange 
             // Act 
             // Arrange && Act && Assert 
-            Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath));
-        }
+            //Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromFile(dataFilePath));
+        //}
 
         [TestCase(@"C:\Users\Ivan Grigorov\Desktop\DataExamples.txt", typeof(DataEntity))]
         public void DataReader_ReturnAllExamplesFromFile_ShouldNotThrowWhenTypeIsClass(string dataFilePath, Type typeOfClassToCreate)
@@ -61,14 +62,15 @@ namespace DecisionTreeTests.ReadingLibrary
             Assert.Throws<ArgumentException>(() => DataReader.ReturnAllExamplesFromEmbeddedRessource(typeOfClassToCreate));
         }
 
-        [TestCase(typeof(DataEntity))]
-        public void DataReader_ReturnAllExamplesFromEmbeddedRessource_ShouldNotThrowWhenTypeIsClass(Type typeOfClassToCreate)
-        {
+        // Again using embedded resource file is not supported anymore
+        //[TestCase(typeof(DataEntity))]
+        //public void DataReader_ReturnAllExamplesFromEmbeddedRessource_ShouldNotThrowWhenTypeIsClass(Type typeOfClassToCreate)
+        //{
             // Arrange 
             // Act 
             // Arrange && Act && Assert 
-            Assert.DoesNotThrow(() => DataReader.ReturnAllExamplesFromEmbeddedRessource(typeOfClassToCreate));
-        }
+            //Assert.DoesNotThrow(() => DataReader.ReturnAllExamplesFromEmbeddedRessource(typeOfClassToCreate));
+        //}
 
     }
 }

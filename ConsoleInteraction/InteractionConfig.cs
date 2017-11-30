@@ -4,22 +4,19 @@ using Decision_Tree_ALg.Config;
 using Decision_Tree_ALg.ReadingLibrary;
 using Decision_Tree_ALg.TreeStructures;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleInteraction
 {
-    class InteractionConfig
+    public class InteractionConfig
     {
-        public ITutorialLoader TutorialLoader { get; } = new ConsoleTutorialLoader();
+        ITutorialLoader TutorialLoader { get; } = new ConsoleTutorialLoader();
         private static Lazy<InteractionConfig> singelton = new Lazy<InteractionConfig>();
         public static InteractionConfig LazyInteractionConfig { get { return singelton.Value; } }
-        public IIteractionDialog dialog = new ConsoleDialog();
+        IIteractionDialog dialog = new ConsoleDialog();
         private Boolean AreExamplesLoaded { get; set; } = false;
         private Boolean AreTestExamplesLoaded { get; set; } = false;
         private Boolean IsTreeGenerated { get; set; } = false;
@@ -40,8 +37,8 @@ namespace ConsoleInteraction
             new Tuple<string, string>("test", "tests the algorithm and returns the accuracy percentage "),
             new Tuple<string, string>("generate config <pathfile>", " Generates new configuration for the node structure")
 
-        };  
-        
+        };
+
         /// <summary>
         /// Here start the methods that correspond to the commands
         /// </summary>
@@ -56,7 +53,7 @@ namespace ConsoleInteraction
             }
             this.MoveToNextCommand();
         }
-         
+
         public void Exit()
         {
             Environment.Exit(0);
@@ -128,7 +125,8 @@ namespace ConsoleInteraction
                 dialog.PrintErrorMessage("Load tree config first ");
                 this.MoveToNextCommand();
             }
-            else {
+            else
+            {
                 try
                 {
                     // TODO: Generate new class and give the type 
@@ -140,7 +138,7 @@ namespace ConsoleInteraction
 
 
                 }
-                catch(InvalidDataException exception)
+                catch (InvalidDataException exception)
                 {
                     dialog.PrintErrorMessage(exception.Message);
                     this.MoveToNextCommand();
@@ -165,15 +163,15 @@ namespace ConsoleInteraction
             }
             else
             {
-                dialog.PrintSuccessfullMessage(testingConfig.ReturnSuccessfullPercentageRateAfterTesting().ToString() + " % Accuracy" );
+                dialog.PrintSuccessfullMessage(testingConfig.ReturnSuccessfullPercentageRateAfterTesting().ToString() + " % Accuracy");
                 this.MoveToNextCommand();
             }
-            
+
         }
 
         public void LoadTestExamples(string pathFile)
         {
-       
+
             if (!File.Exists(pathFile))
             {
                 dialog.PrintErrorMessage("There is no such file.");
@@ -188,7 +186,7 @@ namespace ConsoleInteraction
                 this.MoveToNextCommand();
 
             }
-            
+
         }
 
         public void GenerateConfig(string pathFile)
@@ -209,7 +207,7 @@ namespace ConsoleInteraction
                     this.MoveToNextCommand();
 
                 }
-                catch(InvalidDataException exception)
+                catch (InvalidDataException exception)
                 {
                     dialog.PrintErrorMessage(exception.Message);
                     dialog.PrintAllertMessage("Remember, no symbols such as !@#$%^&*()_- and numbers are allowed in config files");
@@ -225,7 +223,7 @@ namespace ConsoleInteraction
         public void CommandMapping(string command, Queue<String> parameters = null)
         {
             MethodInfo commandMethod = this.GetType().GetMethod(command);
-            if (parameters == null )
+            if (parameters == null)
             {
                 commandMethod.Invoke(this, null);
             }
@@ -242,12 +240,12 @@ namespace ConsoleInteraction
                 Queue<string> commandDetails = dialog.GetCommand();
                 this.CommandMapping(commandDetails.Dequeue(), commandDetails);
             }
-            catch(ArgumentException exception)
+            catch (ArgumentException exception)
             {
                 dialog.PrintErrorMessage(exception.Message);
                 this.MoveToNextCommand();
             }
-            
+
         }
     }
 }

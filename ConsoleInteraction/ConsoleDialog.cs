@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleInteraction
 {
@@ -19,9 +15,9 @@ namespace ConsoleInteraction
                 parsedCommand = CommandParser.ParseCommand(command);
 
             }
-            catch (ArgumentException)
+            catch (ArgumentException exception)
             {
-                throw new ArgumentException("Unexpected command");
+                throw new ArgumentException(exception.Message);
             }
             return parsedCommand;
         }
