@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/.axoCover
+/Decision Tree ALg/Results
+/Decision Tree ALg/Results - Copy
+/Decision Tree ALg/Testing/Tree-11-07-2017-12-48-20.txt

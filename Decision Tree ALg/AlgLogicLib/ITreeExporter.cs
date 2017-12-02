@@ -4,8 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Decision_Tree_ALg.AlgLogicLib
 {
-    interface ITreeExporter
+    public interface ITreeExporter
     {
-        void exportTree(string pathFileToSaveTheExport, TreeNode node);
+        void ExportTree(string pathFileToSaveTheExport, ItreeNode node);
+        Regex Regex { get; }
     }
 }
